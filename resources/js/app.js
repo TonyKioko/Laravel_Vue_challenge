@@ -4,12 +4,12 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import App from './App'
-import Home from './Home'
-import Login from './Login'
-import Register from './Register'
-import SingleProduct from './SingleProduct'
-import Checkout from './Checkout'
+// import App from './App'
+import Home from './components/Home'
+import Login from './components/Login'
+import Register from './components/Register'
+import SingleProduct from './components/SingleProduct'
+import Checkout from './components/Checkout'
 
 
 const router = new VueRouter({
@@ -35,44 +35,44 @@ const router = new VueRouter({
             name: 'single-products',
             component: SingleProduct
         },
-        {
-            path: '/confirmation',
-            name: 'confirmation',
-            component: Confirmation
-        },
-        {
-            path: '/checkout',
-            name: 'checkout',
-            component: Checkout,
-            props: (route) => ({ pid: route.query.pid })
-        },
-        {
-            path: '/dashboard',
-            name: 'userboard',
-            component: UserBoard,
-            meta: {
-                requiresAuth: true,
-                is_user: true
-            }
-        },
-        {
-            path: '/admin/:page',
-            name: 'admin-pages',
-            component: Admin,
-            meta: {
-                requiresAuth: true,
-                is_admin: true
-            }
-        },
-        {
-            path: '/admin',
-            name: 'admin',
-            component: Admin,
-            meta: {
-                requiresAuth: true,
-                is_admin: true
-            }
-        },
+        // {
+        //     path: '/confirmation',
+        //     name: 'confirmation',
+        //     component: Confirmation
+        // },
+        // {
+        //     path: '/checkout',
+        //     name: 'checkout',
+        //     component: Checkout,
+        //     props: (route) => ({ pid: route.query.pid })
+        // },
+        // {
+        //     path: '/dashboard',
+        //     name: 'userboard',
+        //     component: UserBoard,
+        //     meta: {
+        //         requiresAuth: true,
+        //         is_user: true
+        //     }
+        // },
+        // {
+        //     path: '/admin/:page',
+        //     name: 'admin-pages',
+        //     component: Admin,
+        //     meta: {
+        //         requiresAuth: true,
+        //         is_admin: true
+        //     }
+        // },
+        // {
+        //     path: '/admin',
+        //     name: 'admin',
+        //     component: Admin,
+        //     meta: {
+        //         requiresAuth: true,
+        //         is_admin: true
+        //     }
+        // },
     ],
 })
 
@@ -110,7 +110,7 @@ router.beforeEach((to, from, next) => {
 
 const app = new Vue({
     el: '#app',
-    components: { App },
+    // components: { App },
     router,
 });
 
