@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\OrderDetail;
+use App\Order;
+use Auth;
 use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
@@ -14,7 +16,7 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Order::with(['product'])->get(),200);
     }
 
     /**
@@ -35,7 +37,16 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orderDetail = Order::create([
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+        ]);
+
+        return response()->json([
+            'status' => (bool) $orderDetail,
+            'data'   => $orderDetail,
+            'message' => $orderDetail ? 'Order Created!' : 'Error Creating Order'
+        ]);
     }
 
     /**
@@ -46,7 +57,8 @@ class OrderDetailController extends Controller
      */
     public function show(OrderDetail $orderDetail)
     {
-        //
+        return response()->json($orderDetail,200);
+
     }
 
     /**
@@ -69,7 +81,14 @@ class OrderDetailController extends Controller
      */
     public function update(Request $request, OrderDetail $orderDetail)
     {
-        //
+        $status = $orderDetail->update(
+            $request->only(['quantity'])
+        );
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Order Updated!' : 'Error Updating Order'
+        ]);
     }
 
     /**
@@ -80,6 +99,11 @@ class OrderDetailController extends Controller
      */
     public function destroy(OrderDetail $orderDetail)
     {
-        //
+        $status = $orderDetail->delete();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'OrderDetails Deleted!' : 'Error Deleting Order'
+        ]);
     }
 }
