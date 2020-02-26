@@ -17,6 +17,8 @@ import Login from './components/Login'
 import Register from './components/Register'
 import SingleProduct from './components/SingleProduct'
 import Checkout from './components/Checkout'
+import Confirmation from './components/Confirmation'
+
 
 
 const router = new VueRouter({
@@ -42,17 +44,17 @@ const router = new VueRouter({
             name: 'single-products',
             component: SingleProduct
         },
-        // {
-        //     path: '/confirmation',
-        //     name: 'confirmation',
-        //     component: Confirmation
-        // },
-        // {
-        //     path: '/checkout',
-        //     name: 'checkout',
-        //     component: Checkout,
-        //     props: (route) => ({ pid: route.query.pid })
-        // },
+        {
+            path: '/confirmation',
+            name: 'confirmation',
+            component: Confirmation
+        },
+        {
+            path: '/checkout',
+            name: 'checkout',
+            component: Checkout,
+            props: (route) => ({ pid: route.query.pid })
+        },
         // {
         //     path: '/dashboard',
         //     name: 'userboard',
@@ -97,7 +99,7 @@ router.beforeEach((to, from, next) => {
                     next()
                 }
                 else {
-                    next({ name: 'userboard' })
+                    next({ name: 'home' })
                 }
             }
             else if (to.matched.some(record => record.meta.is_user)) {

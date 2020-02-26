@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
       <div class="container">
-        <router-link :to="{name: 'home'}" class="navbar-brand">Big Store</router-link>
+        <router-link :to="{name: 'home'}" class="navbar-brand">JamboStore</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -30,7 +30,6 @@
               <router-link
                 :to="{ name: 'admin' }"
                 class="nav-link"
-                v-if="user_type == 1"
               >Hi, {{name}}</router-link>
             </span>
             <li class="nav-link" v-if="isLoggedIn" @click="logout">Logout</li>

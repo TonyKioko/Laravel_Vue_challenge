@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    // public function index()
-    // {
-    //     return response()->json(User::with(['orders'])->get());
-    // }
+    public function index()
+    {
+        return response()->json(User::with(['orders'])->get());
+    }
 
     public function login(Request $request)
     {
@@ -60,9 +60,9 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    // public function showOrders(User $user)
-    // {
-    //     return response()->json($user->orders()->with(['product'])->get());
-    // }
+    public function showOrders(User $user)
+    {
+        return response()->json($user->orders()->with(['product'])->get());
+    }
 
 }

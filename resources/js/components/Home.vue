@@ -1,7 +1,7 @@
 <template>
         <div>
             <div class="container-fluid hero-section d-flex align-content-center justify-content-center flex-wrap ml-auto">
-                <h2 class="title">Welcome to the bigStore</h2>
+                <h2 class="title">Welcome to JamboStore</h2>
             </div>
             <div class="container">
                 <div class="row">
@@ -11,9 +11,9 @@
                                 <router-link :to="{ path: '/products/'+product.id}">
                                     <img :src="product.image" :alt="product.name">
                                     <h5><span v-html="product.name"></span>
-                                        <span class="small-text text-muted float-right">$ {{product.price}}</span>
+                                        <span class="small-text text-muted float-right">Ksh {{product.price}}</span>
                                     </h5>
-                                    <button class="col-md-4 btn btn-sm btn-primary float-right">Buy Now</button>
+                                    <button class="col-md-4 btn btn-sm btn-primary float-right">Order Now</button>
                                 </router-link>
                             </div>
                         </div>
