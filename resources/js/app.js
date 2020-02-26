@@ -1,10 +1,17 @@
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+require('./bootstrap');
 
+window.Vue = require('vue');
+
+// import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+
+Vue.use(VueAxios, axios);
 Vue.use(VueRouter)
 
-// import App from './App'
+import App from './components/App'
 import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
@@ -110,13 +117,9 @@ router.beforeEach((to, from, next) => {
 
 const app = new Vue({
     el: '#app',
-    // components: { App },
+    components: { App },
     router,
 });
-
-// require('./bootstrap');
-
-// window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
