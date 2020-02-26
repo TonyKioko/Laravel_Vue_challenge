@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/*!***************************************************************************!*\
-  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ***!
-  \***************************************************************************/
+/* 0 */,
+/* 1 */
+/*!************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-!(function webpackMissingModule() { var e = new Error("Cannot find module '/home/tonni/Desktop/code_challenge/resources/assets/js/app.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-!(function webpackMissingModule() { var e = new Error("Cannot find module '/home/tonni/Desktop/code_challenge/resources/assets/sass/app.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/home/tonni/Desktop/code_challenge/resources/assets/js/bootstrap.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })
