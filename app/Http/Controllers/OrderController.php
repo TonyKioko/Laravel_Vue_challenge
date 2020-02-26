@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use App\OrderDetail;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -35,7 +37,20 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create([
+        ]);
+
+        $orderDetail = OrderDetail::create([
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'order_id' => $order->id
+        ]);
+
+        return response()->json([
+            'status' => (bool) $orderDetail,
+            'data'   => $orderDetail,
+            'message' => $orderDetail ? 'Order Created!' : 'Error Creating Order'
+        ]);
     }
 
     /**

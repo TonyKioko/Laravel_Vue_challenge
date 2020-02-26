@@ -16,6 +16,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('users/{user}', 'UserController@update');
     Route::get('users/{user}/orders', 'UserController@showOrders');
     Route::patch('products/{product}/qauntity/add', 'ProductController@updateUnits');
-    Route::resource('/orders_DETAILS', 'OrderDetailController');
+    Route::resource('/orders', 'OrderController');
     Route::resource('/products', 'ProductController')->except(['index', 'show']);
 });

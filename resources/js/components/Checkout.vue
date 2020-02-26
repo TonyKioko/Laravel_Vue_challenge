@@ -91,7 +91,7 @@ export default {
       let quantity = this.quantity;
 
       axios
-        .post("api/orders/", { address, quantity, product_id })
+        .post("api/orders/", { product_id })
         .then(response => this.$router.push("/confirmation"));
     },
     checkUnits(e) {
