@@ -18,6 +18,8 @@ import Register from './components/Register'
 import SingleProduct from './components/SingleProduct'
 import Checkout from './components/Checkout'
 import Confirmation from './components/Confirmation'
+import OrdersList from './components/OrdersList'
+import OrderView from './components/OrderView'
 
 
 
@@ -54,6 +56,17 @@ const router = new VueRouter({
             name: 'checkout',
             component: Checkout,
             props: (route) => ({ pid: route.query.pid })
+        },
+        {
+            path: '/orders',
+            name: 'orders',
+            component: OrdersList,
+        },
+        {
+            path: '/view/orders/:orderId',
+            name: 'OrderView',
+            component: OrderView,
+            props:true
         },
         // {
         //     path: '/dashboard',

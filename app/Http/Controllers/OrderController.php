@@ -16,28 +16,17 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Order::with(['order_details'])->get(),200);
+
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $order = Order::create([
+        ]);
+        $order->update([
+            'order_number' => $order->id
         ]);
 
         $orderDetail = OrderDetail::create([
@@ -59,9 +48,12 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::where('id',$id)->with('order_details')->first();
+
+        return response()->json($order,200);
+        
     }
 
     /**
@@ -93,8 +85,13 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $order = Order::where('id',$id)->first();
+        $order->delete();
+
+        return response()->json([
+            'message' => 'OrderDetails Deleted'
+        ]);
     }
 }
