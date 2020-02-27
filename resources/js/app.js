@@ -20,6 +20,10 @@ import Checkout from './components/Checkout'
 import Confirmation from './components/Confirmation'
 import OrdersList from './components/OrdersList'
 import OrderView from './components/OrderView'
+import SupplierForm from './components/SupplierForm'
+import SupplierList from './components/SupplierList'
+
+
 
 
 
@@ -67,6 +71,16 @@ const router = new VueRouter({
             name: 'OrderView',
             component: OrderView,
             props:true
+        },
+        {
+            path: '/create/supplier',
+            name: 'SupplierForm',
+            component: SupplierForm,
+        },
+        {
+            path: '/suppliers',
+            name: 'SupplierList',
+            component: SupplierList,
         },
         // {
         //     path: '/dashboard',

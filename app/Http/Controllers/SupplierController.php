@@ -7,24 +7,9 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(Supplier::all(), 200);
     }
 
     /**
@@ -35,7 +20,15 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $supplier = Supplier::create([
+            'name' => $request->supplier,
+        ]);
+
+        return response()->json([
+            'data' => $supplier,
+            'message' => $supplier ? 'Supplier Created!' : 'Error Creating Supplier',
+        ]);
     }
 
     /**
@@ -44,9 +37,11 @@ class SupplierController extends Controller
      * @param  \App\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function show(Supplier $supplier)
+    public function show($id)
     {
-        //
+        $supplier = Supplier::where('id',$id)->first();
+        return response()->json($supplier, 200);
+        
     }
 
     /**
@@ -78,8 +73,13 @@ class SupplierController extends Controller
      * @param  \App\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supplier $supplier)
+    public function destroy($id)
     {
-        //
+        $supplier = Supplier::where('id',$id)->first();
+
+        $supplier->delete();
+        return response()->json([
+            'message' => 'Supplier deleted successfully',
+        ]);
     }
 }

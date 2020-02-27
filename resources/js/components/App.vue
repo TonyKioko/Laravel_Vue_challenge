@@ -3,6 +3,8 @@
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
       <div class="container">
         <router-link :to="{name: 'home'}" class="navbar-brand">JamboStore</router-link>
+        <router-link :to="{name: 'orders'}" class="navbar-brand">All Orders</router-link>
+
         <button
           class="navbar-toggler"
           type="button"

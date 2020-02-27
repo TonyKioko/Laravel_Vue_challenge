@@ -19,3 +19,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('/products', 'ProductController')->except(['index', 'show']);
 });
 Route::resource('/orders', 'OrderController');
+Route::resource('/suppliers', 'SupplierController');
+
