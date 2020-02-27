@@ -23,6 +23,11 @@ import OrderView from './components/OrderView'
 import SupplierForm from './components/SupplierForm'
 import SupplierList from './components/SupplierList'
 
+import ProductForm from './components/ProductForm'
+import ProductList from './components/ProductList'
+
+
+
 
 
 
@@ -81,6 +86,16 @@ const router = new VueRouter({
             path: '/suppliers',
             name: 'SupplierList',
             component: SupplierList,
+        },
+        {
+            path: '/create/product',
+            name: 'ProductForm',
+            component: ProductForm,
+        },
+        {
+            path: '/product',
+            name: 'ProductList',
+            component: ProductList,
         },
         // {
         //     path: '/dashboard',
