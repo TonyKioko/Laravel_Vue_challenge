@@ -62,12 +62,25 @@ export default {
     };
   },
   methods: {
+      cleanData(){
+
+                var temp = {}
+                temp.name = this.product.name
+                temp.description = this.product.description
+                temp.quantity = this.product.quantity
+             
+                return temp
+            },
     createProduct() {
       console.log(this.product.name);
-      let product = this.product.name;
+      let name = this.product.name;
       console.log("product", product);
+      let data = this.cleanData();
+      console.log('data',data)
       axios
-        .post("/api/products/", { product })
+        .post("api/products/", {
+          name:name
+        })
         .then(response => {
           console.log("product created succesfully");
           console.log(response);

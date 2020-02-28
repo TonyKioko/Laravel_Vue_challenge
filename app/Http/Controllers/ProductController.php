@@ -26,12 +26,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        dd($request);
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
-            'quanr=tity' => $request->quantity,
-            'price' => $request->price,
-            'image' => $request->image,
+            'quantity' => $request->quantity,
+            // 'price' => $request->price,
+            // 'image' => $request->image,
         ]);
 
         return response()->json([

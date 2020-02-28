@@ -1744,6 +1744,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2114,6 +2116,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2303,14 +2307,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    cleanData: function cleanData() {
+      var temp = {};
+      temp.name = this.product.name;
+      temp.description = this.product.description;
+      temp.quantity = this.product.quantity;
+      return temp;
+    },
     createProduct: function createProduct() {
       var _this = this;
 
       console.log(this.product.name);
-      var product = this.product.name;
+      var name = this.product.name;
       console.log("product", product);
-      axios.post("/api/products/", {
-        product: product
+      var data = this.cleanData();
+      console.log('data', data);
+      axios.post("api/products/", {
+        name: name
       }).then(function (response) {
         console.log("product created succesfully");
         console.log(response);
@@ -2648,6 +2661,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2665,7 +2686,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteSupplier: function deleteSupplier(id) {
       axios["delete"]("api/suppliers/" + id).then(function (response) {
         return console.log("supplier deleted");
-      }); // REFRESH ORDERS ON DELETION 
+      }); // REFRESH ORDERS ON DELETION
       // ADD SWEET ALERT FOR DELETION
     }
   }
@@ -38845,6 +38866,15 @@ var render = function() {
               [_vm._v("All Orders")]
             ),
             _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "navbar-brand",
+                attrs: { to: { name: "SupplierList" } }
+              },
+              [_vm._v("Suppliers")]
+            ),
+            _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
             _c(
@@ -39387,6 +39417,20 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "container" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning btn-md",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.$router.go(-1)
+            }
+          }
+        },
+        [_vm._v(" Back\n              ")]
+      ),
+      _vm._v(" "),
       _c("h2", { staticClass: "text-center" }, [_vm._v("Orders Details")]),
       _vm._v(" "),
       _c("table", { staticClass: "table table-striped" }, [
@@ -40074,10 +40118,29 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "container" }, [
-      _c("h2", { staticClass: "text-center" }, [_vm._v("Suppliers List")]),
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-4" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn-success btn-md",
+                staticStyle: { padding: "10px" },
+                attrs: { to: { name: "SupplierForm" } }
+              },
+              [_vm._v("Create New Supplier")]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "tbody",
@@ -40113,6 +40176,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("h2", { staticClass: "text-center" }, [_vm._v("Suppliers List")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -1,7 +1,15 @@
 <template>
   <div>
     <div class="container">
-      <h2 class="text-center">Suppliers List</h2>
+      <div class="row">
+        <div class="col-md-8">
+          <h2 class="text-center">Suppliers List</h2>
+        </div>
+        <div class="col-md-4">
+          <router-link style="padding:10px;" :to="{'name':'SupplierForm'}" class="btn-success btn-md">Create New Supplier</router-link>
+        </div>
+      </div>
+
       <table class="table table-striped">
         <thead>
           <tr>
@@ -26,7 +34,7 @@
                 class="btn btn-secondary btn-xs mr-2"
               >View
               </router-link>
-            </td> -->
+            </td>-->
           </tr>
         </tbody>
       </table>
@@ -42,16 +50,18 @@ export default {
     };
   },
   mounted() {
-    axios.get("api/suppliers/").then(response => (this.suppliers = response.data));
+    axios
+      .get("api/suppliers/")
+      .then(response => (this.suppliers = response.data));
   },
   methods: {
     deleteSupplier(id) {
       axios
-        .delete("api/suppliers/"+ id)
+        .delete("api/suppliers/" + id)
         .then(response => console.log("supplier deleted"));
 
-        // REFRESH ORDERS ON DELETION 
-        // ADD SWEET ALERT FOR DELETION
+      // REFRESH ORDERS ON DELETION
+      // ADD SWEET ALERT FOR DELETION
     }
   }
 };

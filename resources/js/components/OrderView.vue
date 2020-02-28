@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="container">
+       <button  class="btn btn-warning btn-md" @click.prevent="$router.go(-1)"> Back
+                </button>
       <h2 class="text-center">Orders Details</h2>
       <table class="table table-striped">
         <thead>
