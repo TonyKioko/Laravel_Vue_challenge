@@ -5,6 +5,8 @@
         <router-link :to="{name: 'home'}" class="navbar-brand">JamboStore</router-link>
         <router-link :to="{name: 'orders'}" class="navbar-brand">All Orders</router-link>
         <router-link :to="{name: 'SupplierList'}" class="navbar-brand">Suppliers</router-link>
+        <router-link :to="{name: 'ProductList'}" class="navbar-brand">Products</router-link>
+
 
 
         <button

@@ -16,13 +16,13 @@
             <td>{{order.order_number}}</td>
             <td>{{order.created_at}}</td>
             <td>
-              <button class="primary danger" @click.prevent="deleteOrder(order.id)">Delete</button>
+              <button class="btn-danger" @click.prevent="deleteOrder(order.id)">Delete</button>
             </td>
             <td>
               <router-link
                 :to="{name: 'OrderView', params:{orderId: order.id}}"
               
-                class="btn btn-secondary btn-xs mr-2"
+                class="btn btn-primary btn-xs mr-2"
               >View
               </router-link>
             </td>
@@ -41,7 +41,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("api/orders/").then(response => (this.orders = response.data));
+    axios.get("api/orders/").then(response => (this.orders = response.data.data));
   },
   methods: {
     deleteOrder(id) {

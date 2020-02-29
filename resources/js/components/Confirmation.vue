@@ -10,7 +10,7 @@
         <br />
         <span class="medium-text">Your order has been placed.</span>
         <br />
-        <router-link :to="{name: 'userboard'}" class="small-link">See your orders</router-link>
+        <router-link :to="{name: 'orders'}" class="small-link">See all orders</router-link>
       </h2>
     </div>
   </div>

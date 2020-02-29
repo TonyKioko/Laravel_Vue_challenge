@@ -13,42 +13,43 @@ class ProductsTableSeeder extends Seeder
     {
         $products = [
             [
-                'name' => "MEN'S BETTER THAN NAKED & JACKET",
+                'name' => "Foldable Wireless Mouse",
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua consequat.',
                 'quantity' => 21,
                 'price' => 200.10,
-                'image' => 'http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/mens-better-than-naked-jacket-AVMH_LC9_hero.png',
+                'image' => 'https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/74/148842/1.jpg?6146',
                 'created_at' => new DateTime,
                 'updated_at' => null,
             ],
             [
-                'name' => "WOMEN'S BETTER THAN NAKED™ JACKET",
+                'name' => "Wired Mouse",
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua consequat.',
                 'quantity' => 400,
                 'price' => 1600.21,
-                'image' => 'http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/womens-better-than-naked-jacket-AVKL_NN4_hero.png',
+                'image' => 'https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/86/210112/1.jpg?7765',
                 'created_at' => new DateTime,
                 'updated_at' => null,
+                
             ],
             [
-                'name' => "WOMEN'S SINGLE-TRACK SHOE",
+                'name' => "Lenovo M20 USB 3 Button",
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua consequat.',
                 'quantity' => 37,
                 'price' => 378.00,
-                'image' => 'http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/womens-single-track-shoe-ALQF_JM3_hero.png',
+                'image' => 'https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/19/589662/1.jpg?7785',
                 'created_at' => new DateTime,
                 'updated_at' => null,
             ],
             [
-                'name' => 'Enduro Boa® Hydration Pack',
+                'name' => 'Gaming Mouse ',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua consequat.',
                 'quantity' => 10,
                 'price' => 21.10,
-                'image' => 'http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/enduro-boa-hydration-pack-AJQZ_JK3_hero.png',
+                'image' => 'https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/30/206462/1.jpg?2007',
                 'created_at' => new DateTime,
                 'updated_at' => null,
             ]

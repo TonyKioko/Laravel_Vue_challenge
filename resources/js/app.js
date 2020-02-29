@@ -7,9 +7,12 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+import VueSwal from 'vue-swal';
 
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter)
+
+Vue.use(VueSwal);
 
 import App from './components/App'
 import Home from './components/Home'
@@ -93,7 +96,7 @@ const router = new VueRouter({
             component: ProductForm,
         },
         {
-            path: '/product',
+            path: '/products',
             name: 'ProductList',
             component: ProductList,
         },

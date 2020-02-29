@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <div class="order-box">
-          <img :src="product.image" :alt="product.name" />
+          <img :src="product.image" :alt="product.name" style="width:250px;height:250px;" />
           <h2 class="title" v-html="product.name"></h2>
           <p class="small-text text-muted float-left">Ksh {{product.price}}</p>
           <p class="small-text text-muted float-right">Available Quantity: {{product.quantity}}</p>

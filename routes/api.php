@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 Route::post('/products', 'ProductController@store');
-// Route::resource('/products', 'ProductController')->except(['index', 'show']);
+Route::resource('/products', 'ProductController')->except(['index', 'show']);
 // Route::resource('/products', 'ProductController')->except(['index', 'show']);
 
 Route::resource('/orders', 'OrderController');

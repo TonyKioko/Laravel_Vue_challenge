@@ -48,7 +48,6 @@ class OrderController extends Controller
         ]);
 
         return response()->json([
-            'status' => (bool) $orderDetail,
             'data'   => $orderDetail,
             'message' => $orderDetail ? 'Order Created!' : 'Error Creating Order'
         ]);
@@ -62,7 +61,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::where('id',$id)->with('order_details')->first();
+        $order = Order::where('id',$id)->with('order_details.product')->first();
 
         return response()->json($order,200);
         
