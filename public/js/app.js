@@ -1744,10 +1744,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1887,8 +1883,10 @@ __webpack_require__.r(__webpack_exports__);
       var address = this.address;
       var product_id = this.product.id;
       var quantity = this.quantity;
+      console.log(product_id, quantity);
       axios.post("api/orders/", {
-        product_id: product_id
+        product_id: product_id,
+        quantity: quantity
       }).then(function (response) {
         return _this2.$router.push("/confirmation");
       });
@@ -2071,7 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
             if (_this.$route.params.nextUrl != null) {
               _this.$router.push(_this.$route.params.nextUrl);
             } else {
-              _this.$router.push(is_admin == 1 ? "admin" : "home");
+              _this.$router.push('/');
             }
           }
         });
@@ -2220,6 +2218,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2227,17 +2226,24 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get("api/orders/").then(function (response) {
-      return _this.orders = response.data.data;
-    });
+    this.getOrders();
   },
   methods: {
     deleteOrder: function deleteOrder(id) {
+      var _this = this;
+
       axios["delete"]("api/orders/" + id).then(function (response) {
-        return console.log("order deleted");
-      }); // REFRESH ORDERS ON DELETION 
+        console.log("order deleted");
+
+        _this.getOrders();
+      }); // REFRESH ORDERS ON DELETION
+    },
+    getOrders: function getOrders() {
+      var _this2 = this;
+
+      axios.get("api/orders/").then(function (response) {
+        return _this2.orders = response.data.data;
+      });
     }
   }
 });
@@ -2302,16 +2308,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       product: {
         name: "",
         description: "",
-        quantity: 0
+        quantity: 1
       }
     };
   },
@@ -2328,17 +2331,16 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(this.product.name);
       var name = this.product.name;
-      console.log("product", product);
+      var url = '/api/products/'; // console.log("product", product);
+
       var data = this.cleanData();
       console.log('data', data);
-      axios.post("api/products/", {
-        name: name
-      }).then(function (response) {
+      axios.post(url, data).then(function (response) {
         console.log("product created succesfully");
         console.log(response);
 
         _this.$router.push({
-          name: "SupplierList"
+          name: "ProductList"
         });
       })["catch"](function (error) {
         // if(error){
@@ -2367,6 +2369,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2752,10 +2767,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2763,16 +2774,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get("api/suppliers/").then(function (response) {
-      return _this.suppliers = response.data;
-    });
+    this.getSuppliers();
   },
   methods: {
+    getSuppliers: function getSuppliers() {
+      var _this = this;
+
+      axios.get("api/suppliers/").then(function (response) {
+        return _this.suppliers = response.data;
+      });
+    },
     deleteSupplier: function deleteSupplier(id) {
+      var _this2 = this;
+
       axios["delete"]("api/suppliers/" + id).then(function (response) {
-        return console.log("supplier deleted");
+        console.log("supplier deleted");
+
+        _this2.getSuppliers();
       }); // REFRESH ORDERS ON DELETION
       // ADD SWEET ALERT FOR DELETION
     }
@@ -38990,7 +39008,10 @@ var render = function() {
                       ? _c(
                           "router-link",
                           {
-                            staticClass: "nav-link",
+                            staticStyle: {
+                              "text-decoration": "none",
+                              "margin-right": "5px"
+                            },
                             attrs: { to: { name: "login" } }
                           },
                           [_vm._v("Login")]
@@ -39001,7 +39022,7 @@ var render = function() {
                       ? _c(
                           "router-link",
                           {
-                            staticClass: "nav-link",
+                            staticStyle: { "text-decoration": "none" },
                             attrs: { to: { name: "register" } }
                           },
                           [_vm._v("Register")]
@@ -39009,31 +39030,16 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.isLoggedIn
-                      ? _c(
-                          "span",
-                          [
-                            _vm.user_type == 0
-                              ? _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "nav-link",
-                                    attrs: { to: { name: "userboard" } }
-                                  },
-                                  [_vm._v("Hi, " + _vm._s(_vm.name))]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "nav-link",
-                                attrs: { to: { name: "admin" } }
-                              },
-                              [_vm._v("Hi, " + _vm._s(_vm.name))]
-                            )
-                          ],
-                          1
-                        )
+                      ? _c("span", [
+                          _c(
+                            "p",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: { name: "userboard" } }
+                            },
+                            [_vm._v("Hi, " + _vm._s(_vm.name))]
+                          )
+                        ])
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.isLoggedIn
@@ -39346,7 +39352,7 @@ var render = function() {
                         "button",
                         {
                           staticClass:
-                            "col-md-4 btn btn-sm btn-primary float-right"
+                            "col-md-4 btn btn-sm btn-primary text-center"
                         },
                         [_vm._v("Order Now")]
                       )
@@ -39594,54 +39600,61 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _c("h2", { staticClass: "text-center" }, [_vm._v("Orders List")]),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.orders, function(order) {
-            return _c("tr", { key: order }, [
-              _c("td", [_vm._v(_vm._s(order.order_number))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(order.created_at))]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn-danger",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.deleteOrder(order.id)
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
+      _vm.orders.length > 0
+        ? _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.orders, function(order) {
+                return _c("tr", { key: order }, [
+                  _c("td", [_vm._v(_vm._s(order.order_number))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(order.created_at))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn-danger",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteOrder(order.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-primary btn-xs mr-2",
-                      attrs: {
-                        to: { name: "OrderView", params: { orderId: order.id } }
-                      }
-                    },
-                    [_vm._v("View\n            ")]
+                    "td",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-primary btn-xs mr-2",
+                          attrs: {
+                            to: {
+                              name: "OrderView",
+                              params: { orderId: order.id }
+                            }
+                          }
+                        },
+                        [_vm._v("View")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              )
-            ])
-          }),
-          0
-        )
-      ])
+                ])
+              }),
+              0
+            )
+          ])
+        : _c("div", { staticClass: "text-center" }, [
+            _c("p", [_vm._v("No orders available!")])
+          ])
     ])
   ])
 }
@@ -39719,12 +39732,6 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.product.name,
                     expression: "product.name"
-                  },
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: "required",
-                    expression: "'required'"
                   }
                 ],
                 staticClass: "form-control",
@@ -39749,12 +39756,6 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.product.description,
                     expression: "product.description"
-                  },
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: "required",
-                    expression: "'required'"
                   }
                 ],
                 staticClass: "form-control",
@@ -39779,12 +39780,6 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.product.quantity,
                     expression: "product.quantity"
-                  },
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: "required",
-                    expression: "'required'"
                   }
                 ],
                 staticClass: "form-control",
@@ -39849,52 +39844,88 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "container" }, [
-      _c("h2", { staticClass: "text-center" }, [_vm._v("Product List")]),
-      _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
+      _c("div", { staticClass: "row" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
-          "tbody",
-          _vm._l(_vm.products, function(product) {
-            return _c("tr", { key: product }, [
-              _c("td", [_vm._v(_vm._s(product.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(product.price))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(product.quantity))]),
-              _vm._v(" "),
-              _c("td", [
-                _c("img", {
-                  staticStyle: { width: "40px", height: "40px" },
-                  attrs: { src: product.image, alt: product.name }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn-danger",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.deleteProduct(product.id)
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ])
-            ])
-          }),
-          0
+          "div",
+          { staticClass: "col-md-4" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn-success btn-md",
+                staticStyle: { padding: "10px" },
+                attrs: { to: { name: "ProductForm" } }
+              },
+              [_vm._v("Create Product")]
+            )
+          ],
+          1
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.products.length > 0
+        ? _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.products, function(product) {
+                return _c("tr", { key: "i" + product }, [
+                  _c("td", [_vm._v(_vm._s(product.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.price))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.quantity))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("img", {
+                      staticStyle: { width: "40px", height: "40px" },
+                      attrs: { src: product.image, alt: product.name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn-danger",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteProduct(product.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        : _c(
+            "div",
+            {
+              staticClass: "text-center",
+              staticStyle: { "margin-top": "20px" }
+            },
+            [_c("p", { staticClass: "h4" }, [_vm._v("No products available!")])]
+          )
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("h2", { staticClass: "text-center" }, [_vm._v("Product List")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -40332,39 +40363,52 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.suppliers, function(supplier) {
-            return _c("tr", { key: supplier }, [
-              _c("td", [_vm._v(_vm._s(supplier.id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(supplier.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(supplier.created_at))]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "primary danger",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.deleteSupplier(supplier.id)
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
+      _vm.suppliers.length > 0
+        ? _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.suppliers, function(supplier) {
+                return _c("tr", { key: supplier }, [
+                  _c("td", [_vm._v(_vm._s(supplier.id))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(supplier.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(supplier.created_at))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn-danger",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteSupplier(supplier.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        : _c(
+            "div",
+            {
+              staticClass: "text-center",
+              staticStyle: { "margin-top": "20px" }
+            },
+            [
+              _c("p", { staticClass: "h4" }, [
+                _vm._v("No suppliers available!")
               ])
-            ])
-          }),
-          0
-        )
-      ])
+            ]
+          )
     ])
   ])
 }
@@ -55729,34 +55773,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     path: '/products',
     name: 'ProductList',
     component: _components_ProductList__WEBPACK_IMPORTED_MODULE_16__["default"]
-  } // {
-  //     path: '/dashboard',
-  //     name: 'userboard',
-  //     component: UserBoard,
-  //     meta: {
-  //         requiresAuth: true,
-  //         is_user: true
-  //     }
-  // },
-  // {
-  //     path: '/admin/:page',
-  //     name: 'admin-pages',
-  //     component: Admin,
-  //     meta: {
-  //         requiresAuth: true,
-  //         is_admin: true
-  //     }
-  // },
-  // {
-  //     path: '/admin',
-  //     name: 'admin',
-  //     component: Admin,
-  //     meta: {
-  //         requiresAuth: true,
-  //         is_admin: true
-  //     }
-  // },
-  ]
+  }]
 });
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {

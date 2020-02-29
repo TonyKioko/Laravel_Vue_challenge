@@ -25,18 +25,14 @@
           <ul class="navbar-nav mr-auto"></ul>
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
-            <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLoggedIn">Login</router-link>
-            <router-link :to="{ name: 'register' }" class="nav-link" v-if="!isLoggedIn">Register</router-link>
+            <router-link :to="{ name: 'login' }" class="" v-if="!isLoggedIn" style="text-decoration:none;margin-right:5px;">Login</router-link>
+            
+            <router-link :to="{ name: 'register' }" class="" v-if="!isLoggedIn" style="text-decoration:none;">Register</router-link>
             <span v-if="isLoggedIn">
-              <router-link
+              <p
                 :to="{ name: 'userboard' }"
                 class="nav-link"
-                v-if="user_type == 0"
-              >Hi, {{name}}</router-link>
-              <router-link
-                :to="{ name: 'admin' }"
-                class="nav-link"
-              >Hi, {{name}}</router-link>
+              >Hi, {{name}}</p>
             </span>
             <li class="nav-link" v-if="isLoggedIn" @click="logout">Logout</li>
           </ul>

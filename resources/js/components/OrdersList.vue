@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <h2 class="text-center">Orders List</h2>
-      <table class="table table-striped">
+      <table v-if="orders.length > 0" class="table table-striped">
         <thead>
           <tr>
             <th>Order Number</th>
@@ -21,14 +21,15 @@
             <td>
               <router-link
                 :to="{name: 'OrderView', params:{orderId: order.id}}"
-              
                 class="btn btn-primary btn-xs mr-2"
-              >View
-              </router-link>
+              >View</router-link>
             </td>
           </tr>
         </tbody>
       </table>
+      <div v-else class="text-center">
+        <p>No orders available!</p>
+      </div>
     </div>
   </div>
 </template>
@@ -41,15 +42,21 @@ export default {
     };
   },
   mounted() {
-    axios.get("api/orders/").then(response => (this.orders = response.data.data));
+    this.getOrders();
   },
   methods: {
     deleteOrder(id) {
-      axios
-        .delete("api/orders/"+ id)
-        .then(response => console.log("order deleted"));
+      axios.delete("api/orders/" + id).then(response => {
+        console.log("order deleted");
+        this.getOrders();
+      });
 
-        // REFRESH ORDERS ON DELETION 
+      // REFRESH ORDERS ON DELETION
+    },
+    getOrders() {
+      axios
+        .get("api/orders/")
+        .then(response => (this.orders = response.data.data));
     }
   }
 };

@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <table class="table table-striped">
+      <table v-if="suppliers.length > 0" class="table table-striped">
         <thead>
           <tr>
             <th>Id</th>
@@ -25,19 +25,15 @@
             <td>{{supplier.name}}</td>
             <td>{{supplier.created_at}}</td>
             <td>
-              <button class="primary danger" @click.prevent="deleteSupplier(supplier.id)">Delete</button>
+              <button class="btn-danger" @click.prevent="deleteSupplier(supplier.id)">Delete</button>
             </td>
-            <!-- <td>
-              <router-link
-                :to="{name: 'OrderView', params:{orderId: supplier.id}}"
-              
-                class="btn btn-secondary btn-xs mr-2"
-              >View
-              </router-link>
-            </td>-->
+        
           </tr>
         </tbody>
       </table>
+       <div v-else class="text-center" style="margin-top:20px;">
+        <p class="h4">No suppliers available!</p>
+      </div>
     </div>
   </div>
 </template>
@@ -50,15 +46,21 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("api/suppliers/")
-      .then(response => (this.suppliers = response.data));
+   this.getSuppliers();
   },
   methods: {
+
+    getSuppliers(){
+       axios
+      .get("api/suppliers/")
+      .then(response => (this.suppliers = response.data));
+    },
     deleteSupplier(id) {
       axios
         .delete("api/suppliers/" + id)
-        .then(response => console.log("supplier deleted"));
+        .then(response => {console.log("supplier deleted")
+        this.getSuppliers()
+        });
 
       // REFRESH ORDERS ON DELETION
       // ADD SWEET ALERT FOR DELETION

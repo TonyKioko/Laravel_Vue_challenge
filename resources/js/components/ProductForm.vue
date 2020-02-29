@@ -19,7 +19,6 @@
                 type="text"
                 v-model="product.name"
                 class="form-control"
-                v-validate="'required'"
                 name="product.name"
               />
               <label>Description</label>
@@ -27,7 +26,6 @@
                 type="text"
                 v-model="product.description"
                 class="form-control"
-                v-validate="'required'"
                 name="product.description"
               />
               <label>Quantity</label>
@@ -35,7 +33,6 @@
                 type="text"
                 v-model="product.quantity"
                 class="form-control"
-                v-validate="'required'"
                 name="product.quantity"
               />
             </div>
@@ -57,7 +54,7 @@ export default {
       product: {
         name: "",
         description: "",
-        quantity: 0
+        quantity: 1
       }
     };
   },
@@ -74,18 +71,18 @@ export default {
     createProduct() {
       console.log(this.product.name);
       let name = this.product.name;
-      console.log("product", product);
+      let url = '/api/products/';
+      // console.log("product", product);
       let data = this.cleanData();
       console.log('data',data)
+      
       axios
-        .post("api/products/", {
-          name:name
-        })
+        .post(url, data)
         .then(response => {
           console.log("product created succesfully");
           console.log(response);
           this.$router.push({
-            name: "SupplierList"
+            name: "ProductList"
           });
         })
         .catch(error => {

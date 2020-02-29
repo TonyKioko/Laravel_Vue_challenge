@@ -13,7 +13,7 @@
                                     <h5><span v-html="product.name"></span>
                                         <span class="small-text text-muted float-right">Ksh {{product.price}}</span>
                                     </h5>
-                                    <button class="col-md-4 btn btn-sm btn-primary float-right">Order Now</button>
+                                    <button class="col-md-4 btn btn-sm btn-primary text-center">Order Now</button>
                                 </router-link>
                             </div>
                         </div>

@@ -16,8 +16,8 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
-            $table->string('image')->nullable();
-            $table->decimal('price', 8, 2)->nullable();
+            $table->string('image')->nullable()->default('https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/38/8336/1.jpg?5471');
+            $table->decimal('price', 8, 2)->nullable()->default(200);
             $table->text('description')->nullable();
             $table->unsignedInteger('quantity')->default(0);
             $table->timestamps();

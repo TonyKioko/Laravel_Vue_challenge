@@ -100,33 +100,7 @@ const router = new VueRouter({
             name: 'ProductList',
             component: ProductList,
         },
-        // {
-        //     path: '/dashboard',
-        //     name: 'userboard',
-        //     component: UserBoard,
-        //     meta: {
-        //         requiresAuth: true,
-        //         is_user: true
-        //     }
-        // },
-        // {
-        //     path: '/admin/:page',
-        //     name: 'admin-pages',
-        //     component: Admin,
-        //     meta: {
-        //         requiresAuth: true,
-        //         is_admin: true
-        //     }
-        // },
-        // {
-        //     path: '/admin',
-        //     name: 'admin',
-        //     component: Admin,
-        //     meta: {
-        //         requiresAuth: true,
-        //         is_admin: true
-        //     }
-        // },
+        
     ],
 })
 

@@ -37,10 +37,11 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             "product_id" => "required",
             "quantity" => "required",
-            "order_id" => "required"
+            // "order_id" => "required"
         ]);
 
         if($validator->fails()){
