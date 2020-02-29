@@ -50,6 +50,10 @@ $ composer install
 
   ```$ php artisan passport:install```
 
+- Generate laravel passport Keys
+
+  ```$ php artisan passport:client --personal``
+
 - Seed Database
 
   ```$ php artisan db:seed```
