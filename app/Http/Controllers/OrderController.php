@@ -6,6 +6,8 @@ use App\Order;
 use Illuminate\Http\Request;
 use App\OrderDetail;
 use Auth;
+use Validator;
+
 
 class OrderController extends Controller
 {
@@ -35,8 +37,22 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            "product_id" => "required",
+            "quantity" => "required",
+            "order_id" => "required"
+        ]);
+
+        if($validator->fails()){
+            return \response()->json([
+                "message" => "Validation error",
+                "error" => $validator->errors()
+            ], 400);
+        }
+
         $order = Order::create([
         ]);
+        
         $order->update([
             'order_number' => $order->id
         ]);

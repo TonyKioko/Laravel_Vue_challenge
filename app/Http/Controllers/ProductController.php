@@ -26,7 +26,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        // dd($request);
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -36,7 +36,6 @@ class ProductController extends Controller
         ]);
 
         return response()->json([
-            'status' => (bool) $product,
             'data' => $product,
             'message' => $product ? 'Product Created!' : 'Error Creating Product',
         ]);
