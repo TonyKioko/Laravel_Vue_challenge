@@ -52,7 +52,7 @@ $ composer install
 
 - Generate laravel passport Keys
 
-  ```$ php artisan passport:client --personal``
+  ```$ php artisan passport:client --personal```
 
 - Seed Database
 
