@@ -16,7 +16,19 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return response()->json(Order::with(['order_details'])->get(),200);
+        $orders = Order::with(['order_details'])->get();
+
+        if (is_null($orders) || empty($orders) || sizeof($orders) < 1){
+            return response()->json([
+                "message"=> "No Available Orders available"
+            ], 201);
+        }
+
+        return \response()->json([
+            "message"=> "All available Types",
+            "data"=> $orders
+        ], 200);
+        // return response()->json(Order::with(['order_details'])->get(),200);
 
         
     }
